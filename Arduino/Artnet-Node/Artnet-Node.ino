@@ -55,7 +55,7 @@ void setup()
     analogWrite(etc, 2);
     analogWrite(brk, 255);
 
-    Ethernet.begin(mac, ip);
+     Ethernet.begin(mac, ip);
       
     artnet.begin();
 
