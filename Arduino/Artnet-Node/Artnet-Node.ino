@@ -1,7 +1,7 @@
 #include <DMXSerial.h>
 #include <Artnet.h>
 
-const IPAddress ip(192, 168, 1, 240);
+const IPAddress ip(192, 168, 0, 151);
 uint8_t mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC};
 
 ArtnetReceiver artnet;
@@ -10,7 +10,7 @@ uint8_t data[size];
 uint32_t universe_rec = 0;
 uint32_t universe_send = 1;
 
-int stopper = 500;
+int stopper = 100;
 
 int raw = 5; //grün
 int etc = 6; //gelb
@@ -54,9 +54,9 @@ void setup()
     analogWrite(raw, 255);
     analogWrite(etc, 2);
     analogWrite(brk, 255);
-    
-    //Ethernet.begin(mac, ip);
-    Ethernet.maintain();
+
+    Ethernet.begin(mac, ip);
+      
     artnet.begin();
 
     DMXSerial.init(DMXController);
@@ -65,15 +65,6 @@ void setup()
 }
 
 void loop()
-{
-    artnet.parse();
-
-    /*for(int i=0; i<512; i++)
-    {
-        data[i]=125;
-        //data[i] = DMXSerial.read(i+1);
-    }
-    
-    artnet.set(universe_send, data, size);
-    artnet.streaming();*/
+{      
+  artnet.parse();
 }
