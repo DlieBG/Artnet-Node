@@ -34,7 +34,7 @@ void loop()
         //dmx[i]=(uint8_t)(byte)packetBuffer[18+i];
   
       for(int i=1; i<=512; i++)
-        DmxSimple.write(i, (uint8_t)(byte)packetBuffer[18+i]);
+        DmxSimple.write(i, (uint8_t)(byte)packetBuffer[17+i]);
         
       analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
     }
