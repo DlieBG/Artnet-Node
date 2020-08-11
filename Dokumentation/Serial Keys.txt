@@ -1,0 +1,3 @@
+u - Universum
+i - IP
+id - DHCP

@@ -10,8 +10,6 @@ byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 EthernetUDP Udp;
 
-//uint8_t dmx[512];
-
 byte universe = 1;
 
 void setup() 
@@ -21,6 +19,7 @@ void setup()
   Serial.println("");
   Serial.println("");
   Serial.println("Start");
+  
   setupEEPROM();
   Udp.begin(6454);
   DmxSimple.usePin(3);
@@ -33,10 +32,7 @@ void loop()
   {
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
     if((byte)packetBuffer[14]==universe)
-    {
-      //for(int i=0; i<512; i++)
-        //dmx[i]=(uint8_t)(byte)packetBuffer[18+i];
-  
+    {  
       for(int i=1; i<=512; i++)
         DmxSimple.write(i, (uint8_t)(byte)packetBuffer[17+i]);
         
@@ -54,7 +50,8 @@ void loop()
       EEPROM.write(0, universe);
       Serial.println("Universum geändert!");
     }
-    if(serial[0]=='i')//universe change
+    
+    if(serial[0]=='i')//ip change
     {
       serial.remove(0,1);
       if(serial[0]=='d')
