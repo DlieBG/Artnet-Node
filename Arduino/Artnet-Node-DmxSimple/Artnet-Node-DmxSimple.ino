@@ -27,19 +27,58 @@ void setup()
 
 void loop() 
 {
+  receiveArtnet();
+  receiveSerial();
+}
+
+void setupEEPROM()
+{
+  universe = (byte)EEPROM.read(0);
+  Serial.print("Universum: ");
+  Serial.println(universe);
+  
+  if(EEPROM.read(1)==1)//dhcp
+    Ethernet.begin(mac);
+  else
+  {
+    IPAddress ip(EEPROM.read(2), EEPROM.read(3), EEPROM.read(4), EEPROM.read(5));
+    Ethernet.begin(mac, ip);
+  }
+  Serial.print("IP Addresse: ");
+  Serial.println(Ethernet.localIP());
+}
+
+void receiveArtnet()
+{
   int packetSize = Udp.parsePacket();
   if (packetSize) 
   {
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
     if((byte)packetBuffer[14]==universe)
     {  
-      for(int i=1; i<=512; i++)
-        DmxSimple.write(i, (uint8_t)(byte)packetBuffer[17+i]);
-        
+      //uint8_t dmx[512];
+
+      //for(int i=0; i<512; i++)
+        //dmx[i]=(uint8_t)(byte)packetBuffer[18+i];
+      
+      //outputDmx(dmx);
+
+      for(int i=0; i<512; i++)
+        DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
       analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
     }
   }
+}
 
+void outputDmx(uint8_t dmx[])
+{
+  for(int i=0; i<512; i++)
+    DmxSimple.write(i, dmx[i]);   
+  analogWrite(6, dmx[0]);
+}
+
+void receiveSerial()
+{
   if(Serial.available())
   {
     String serial = Serial.readString();
@@ -70,23 +109,6 @@ void loop()
       }
     }
   }
-}
-
-bool setupEEPROM()
-{
-  universe = (byte)EEPROM.read(0);
-  Serial.print("Universum: ");
-  Serial.println(universe);
-  
-  if(EEPROM.read(1)==1)//dhcp
-    Ethernet.begin(mac);
-  else
-  {
-    IPAddress ip(EEPROM.read(2), EEPROM.read(3), EEPROM.read(4), EEPROM.read(5));
-    Ethernet.begin(mac, ip);
-  }
-  Serial.print("IP Addresse: ");
-  Serial.println(Ethernet.localIP());
 }
 
 String split(String data, char separator, int index)
