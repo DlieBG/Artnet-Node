@@ -11,6 +11,7 @@ byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 EthernetUDP Udp;
 
 byte universe = 1;
+int stopper = 0;
 
 void setup() 
 {
@@ -46,6 +47,10 @@ void setupEEPROM()
   }
   Serial.print("IP Addresse: ");
   Serial.println(Ethernet.localIP());
+
+  stopper = EEPROM.read(6);
+  Serial.print("Mode: ");
+  Serial.println(stopper);
 }
 
 void receiveArtnet()
@@ -56,25 +61,28 @@ void receiveArtnet()
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
     if((byte)packetBuffer[14]==universe)
     {  
-      //uint8_t dmx[512];
-
-      //for(int i=0; i<512; i++)
-        //dmx[i]=(uint8_t)(byte)packetBuffer[18+i];
+      if(stopper == 0)
+      {
+        for(int i=0; i<512; i++)
+          DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
+        analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
+      }
+      else
+      {
+        if((uint8_t)(byte)packetBuffer[17+stopper]!=0||(uint8_t)(byte)packetBuffer[18+stopper]!=100)
+        {
+          
+        }
+        else
+        {
+          for(int i=0; i<512; i++)
+            DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
+          analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
+        }
+      }
       
-      //outputDmx(dmx);
-
-      for(int i=0; i<512; i++)
-        DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
-      analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
     }
   }
-}
-
-void outputDmx(uint8_t dmx[])
-{
-  for(int i=0; i<512; i++)
-    DmxSimple.write(i, dmx[i]);   
-  analogWrite(6, dmx[0]);
 }
 
 void receiveSerial()
@@ -107,6 +115,14 @@ void receiveSerial()
         EEPROM.write(5, split(serial, '.', 3).toInt());
         Serial.println("IP geändert!");
       }
+    }
+
+    if(serial[0]=='e')//ETC Trick
+    {
+      serial.remove(0,1);
+      stopper = serial.toInt();
+      EEPROM.write(6, stopper);
+      Serial.println("ETC Trick aktiviert!");
     }
   }
 }

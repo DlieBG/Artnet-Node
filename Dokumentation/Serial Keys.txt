@@ -1,3 +1,5 @@
 u - Universum
 i - IP
 id - DHCP
+r - Raw Mode
+e - ETC Mode mit Stopper

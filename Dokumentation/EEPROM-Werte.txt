@@ -1,5 +1,4 @@
 0 - Universum
 1 - DHCP ("1"=DHCP)
 2 bis 5 - IP
-6 - Output Mode ("0"=Raw "1"=ETC Trick)
-7 - DMX Wert für ETC Trick Stopper
+6 - Output Mode ("0"=Raw "1-512"=ETC Trick [Stopper])
