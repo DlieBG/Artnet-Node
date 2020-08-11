@@ -1,0 +1,3 @@
+0 - Universum
+1 - DHCP ("1"=DHCP)
+2 bis 5 - IP
