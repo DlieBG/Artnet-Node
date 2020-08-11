@@ -22,6 +22,7 @@ void setup()
   Serial.println("Start");
   
   setupEEPROM();
+  
   Udp.begin(6454);
   DmxSimple.usePin(3);
 }
@@ -63,6 +64,7 @@ void receiveArtnet()
     {  
       if(stopper == 0)
       {
+        //Raw
         for(int i=0; i<512; i++)
           DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
         analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
@@ -71,10 +73,12 @@ void receiveArtnet()
       {
         if((uint8_t)(byte)packetBuffer[17+stopper]!=0||(uint8_t)(byte)packetBuffer[18+stopper]!=100)
         {
+          //Break durch ETC Trick
           
         }
         else
         {
+          //Ausgabe mit ETC Trick
           for(int i=0; i<512; i++)
             DmxSimple.write(i+1, (uint8_t)(byte)packetBuffer[18+i]);
           analogWrite(6, (uint8_t)(byte)packetBuffer[18]);
