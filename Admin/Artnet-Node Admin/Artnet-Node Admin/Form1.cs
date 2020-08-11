@@ -45,5 +45,15 @@ namespace Artnet_Node_Admin
         {
            serialPort1.Write("u"+numericUpDown1.Value.ToString());
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            serialPort1.Write("i" + textBox1.Text);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            serialPort1.Write("id");
+        }
     }
 }
