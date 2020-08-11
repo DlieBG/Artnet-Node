@@ -1,0 +1,10 @@
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\bin\Debug\Artnet-Node Admin.exe.config
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\bin\Debug\Artnet-Node Admin.exe
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\bin\Debug\Artnet-Node Admin.pdb
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet-Node Admin.csprojAssemblyReference.cache
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet_Node_Admin.Form1.resources
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet_Node_Admin.Properties.Resources.resources
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet-Node Admin.csproj.GenerateResource.cache
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet-Node Admin.csproj.CoreCompileInputs.cache
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet-Node Admin.exe
+C:\Users\mail\OneDrive\Artnet-Node\Admin\Artnet-Node Admin\Artnet-Node Admin\obj\Debug\Artnet-Node Admin.pdb
