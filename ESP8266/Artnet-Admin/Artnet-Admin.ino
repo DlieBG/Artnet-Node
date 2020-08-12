@@ -27,6 +27,10 @@ void setup() {
   server.on("/style.css", []() {
     server.send(200, "text/css", style());
   });
+  server.on("/set", []() {
+    Serial.println(server.arg(server.argName(0)));
+    server.send(200, "text/css", server.arg(server.argName(0)));
+  });
   
   
   server.begin();
