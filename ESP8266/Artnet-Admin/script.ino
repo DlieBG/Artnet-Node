@@ -1,6 +1,9 @@
 String script()
 {
-  return "  Test\
-            Asd\
+  return "\
+  function changeIP()\
+  {\
+    Console.log('Test');\
+  }\
   ";
 }
