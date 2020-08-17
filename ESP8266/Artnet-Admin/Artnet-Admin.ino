@@ -3,7 +3,7 @@
 #include <ESP8266WebServer.h>
 
 #ifndef APSSID
-#define APSSID "Artnet Node Admin"
+#define APSSID "Schwering Software Artnet Node"
 #define APPSK  "Schwering Software"
 #endif
 
